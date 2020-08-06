@@ -132,8 +132,9 @@ span {
 button {
     font-family: 'Raleway', sans-serif;
     color: white;
-    margin: 15px;
+    margin: 30px 15px 10px 15px;
     padding: 8px;
+    width: 20%;
     border: 1px solid #444444;
     border-radius: 20px;
     background-color: #444444;
@@ -164,15 +165,15 @@ text-align: center;
     margin-bottom: 5%;
     margin-top: 2%;
     box-shadow: 1px 1px 6px grey;
-    width: 70%;
+    width: 40%;
     padding: 2%;
     font-size: 1rem;
-    text-align: justify;
+    text-align: center;
 }
 
 .recap-part img {
-    height: 30%;
-    width: 30%;
+    height: 70%;
+    width: 70%;
 }
 
 /*  Formulaire */
@@ -231,3 +232,25 @@ justify-content: center;
     border: none;
 }
 
+/* Design page confirmation */
+.confirmation{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titre{
+    text-align: center;
+}
+
+.titre p{
+    margin-top: 5%;
+}
+
+.icon-confirmation{
+    font-size:3rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 5%;
+    color: #444444;
+}
