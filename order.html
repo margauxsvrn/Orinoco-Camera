@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Intern link -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Extern link -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+
+    <title>Orinoco | Camera</title>
+
+</head>
+
+<body>
+
+    <!-- Nav Bar -->
+
+    <nav>
+        <div>
+           <a href="./index.html">Orinoco | <span class="nom-camera">Camera</span></a> 
+        </div>
+        <div class="contact">
+            Contact
+        </div>
+    </nav>
+
+
+    <!-- Descriptif commande -->
+<section class="recap-part">
+    <h1 class="titre">Récapitulatif de commande</h1>
+</section>
+
+<section class="formulaire">
+    <form action="POST">
+         <p>
+            <i>Complétez le formulaire. Les champs marqués par </i><em>*</em> sont <em>obligatoires</em>
+        </p>
+        <fieldset>
+            <legend>Contact</legend>
+              <label for="nom">Nom<em>* </em> </label>
+              <input id="nom" placeholder="Dupont Marie" autofocus="" required="">
+              <br>
+              <label for="telephone">Téléphone</label>
+              <input id="telephone" type="tel" placeholder="06xxxxxxxx" pattern="06[0-9]{8}">
+              <br>
+              <label for="email">Email<em>* </em> </label>
+              <input id="email" type="email" placeholder="prenom.nom@gmail.com" required="" pattern="[a-zA-Z]*.[a-zA-Z]*@"><br>
+          </fieldset>
+        
+          <fieldset>
+            <legend>Coordonnées</legend>
+              <label for="adresse">Adresse<em>* </em> </label>
+              <input id="adresse" placeholder="Place de la comédie" autofocus="" required="">
+              <br>
+              <label for="ville">Ville<em>* </em> </label>
+              <input id="ville" required="" pattern="[a-zA-Z]" placeholder="Montpellier">
+              <br>
+              <label for="postal">Code postal<em>* </em> </label>
+              <input id="postal" required="" pattern="06[0-9]{8}"placeholder="34000"><br>
+          </fieldset>
+    </form>
+    <button class="button-valid">Je valide la commande</button>
+</section>
+
+    <!-- Script Javascript -->
+<script src="./js/order-page.js"></script>
+
+<!-- Script Font Awesome -->
+<script src="https://kit.fontawesome.com/655edc4fae.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
