@@ -1,5 +1,6 @@
+const data = JSON.parse(localStorage.getItem('margaux_oc'))
 
-const cameraId = localStorage.getItem('margaux_oc'); // Création de la variable sur laquelle je récupère les éléments stocker sur le local storage
+const cameraId = data.selectedCameraId // Création de la variable sur laquelle je récupère les éléments stocker sur le local storage
 
 fetch(`http://localhost:3000/api/cameras/${cameraId}`).then(function(response){
     response.json().then(function(camera){ 
@@ -7,32 +8,36 @@ fetch(`http://localhost:3000/api/cameras/${cameraId}`).then(function(response){
         let $div = document.createElement('div');
         $article.appendChild($div);
         
-       $div.innerHTML = `<img src='${camera.imageUrl}'/> 
+       let content = `<img src='${camera.imageUrl}'/> 
        <h1 class="nom-camera"> Camera ${camera.name} </h1> 
        <p> ${camera.description} </p> 
        <div> <span>Prix</span> : ${camera.price} € </div>
        <br> 
        <div> <span><label for="lenses-select">Lentilles</span> :</label>
        <select name="lenses" id="lenses-select">
-        <option value="">Choisissez une taille de lentilles</option>
-        <option value="${camera.lenses[0]}">${camera.lenses[0]}</option>
-        <option value="${camera.lenses[1]}">${camera.lenses[1]}</option>
-        <option value="${camera.lenses[2]}">${camera.lenses[2]}</option></div>
-        </select>
+        <option value="">Choisissez une taille de lentilles</option>`;
+        for (const lense of camera.lenses){
+        content += `<option value="${lense}">${lense}</option>`;
+        }
+
+        content +=`</select>
+        </div>
         <br>
         <div class="basket-icon"> <i class="fas fa-shopping-basket"></i> </div> 
         <span class="order-input">Quantité</span> : 
         <input type="text" id="quantity" value="0"></input>
         <div><button>Commander</button></div>`;
         
+        $div.innerHTML = content;
+
         // Je crée l'objet a mettre dans le local storage
-        class cameraChoose {
-            constructor(image, name, price, id, order){
+        class CameraChoose {
+            constructor(image, name, price, id, quantity){
                 this.image = image;
                 this.name = name;
                 this.price = price;
                 this.id = id;
-                this.order = order;
+                this.quantity = quantity;
             }
         }
 
@@ -45,9 +50,16 @@ fetch(`http://localhost:3000/api/cameras/${cameraId}`).then(function(response){
         
         let $button = document.querySelector('button');
         $button.addEventListener('click', function(){
-            var order = new cameraChoose (camera.imageUrl, camera.name, camera.price, camera._id, numberOrder);
-            localStorage.setItem('margaux_oc', JSON.stringify(order)) // Mettre dans le local storage l'objet contenant nom, prix, et quantité 
-            location.href = '../order.html'
+            var order = new CameraChoose (camera.imageUrl, camera.name, camera.price, camera._id, numberOrder);
+            var existingIndex = data.products.findIndex(element => camera._id == element.id)
+            if (existingIndex == -1 ){
+                data.products.push(order)
+            } else {
+                data.products[existingIndex].quantity = order.quantity
+            }
+
+            localStorage.setItem('margaux_oc', JSON.stringify(data)) // Mettre dans le local storage l'objet
+            location.href = './order.html'
             
         })
 
@@ -56,3 +68,4 @@ fetch(`http://localhost:3000/api/cameras/${cameraId}`).then(function(response){
     alert('Erreur, la page ne répond pas, veuillez nous excuser')
 
 });
+

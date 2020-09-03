@@ -22,6 +22,11 @@ nav {
     margin-top: 25px;
 }
 
+.contact i {
+    display: inline-block;
+    margin-right: 40px;
+}
+
 nav div {
     font-size: 2rem;
     font-family:'Raleway', sans-serif;
@@ -60,6 +65,13 @@ nav a:hover{
     box-shadow: 1px 1px 6px grey;
     width: 50%;
     height: auto;
+    opacity: 1;
+    transition: all 350ms;
+}
+
+.product-list li:hover{
+    opacity: 0.8;
+    cursor: pointer;
 }
 
 .product-list li div {
@@ -176,12 +188,25 @@ text-align: center;
     width: 70%;
 }
 
+/* Bouton retirer du panier  */ 
+.button-remove {
+width: 25%;
+display: flex;
+text-align: center;
+padding: 2%;
+margin-right: auto;
+margin-left: auto;
+margin-bottom: 5%;
+margin-top: 5%;
+}
+
 /*  Formulaire */
 
 .formulaire {
     margin-right: auto;
     margin-left: auto;
     width: 70%;
+    margin-bottom: 10%;
 }
 
 fieldset{
@@ -220,11 +245,56 @@ font-size: 1rem;
 border-radius: 40px;
 width: 40%;
 display: flex;
-margin-right: auto;
+margin-top: 5%;
 margin-left: auto;
-margin-bottom: 10%;
+font-family: 'Raleway', sans-serif;
+color: white;
 justify-content: center;
+border: 1px solid #444444;
+background-color: #444444;
+transition: all 350ms;
 }
+
+.button-valid:focus {
+    outline: none;
+    border: 1px solid #D0AA47;
+    background-color: #D0AA47;
+}
+
+.button-valid:hover {
+    outline: none;
+    border: 1px solid #D0AA47;
+    background-color: #D0AA47;
+}
+
+/* Bouton valider l'envoi des coordonnées */
+
+.button-valid-informations {
+    padding: 2%;
+    font-size: 1rem;
+    border-radius: 10px;
+    width: 31%;
+    display: flex;
+    margin-right: auto;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    justify-content: center;
+    border: 1px solid #444444;
+    background-color: #444444;
+    transition: all 350ms;
+    }
+    
+    .button-valid-informations:focus {
+        outline: none;
+        border: 1px solid #D0AA47;
+        background-color: #D0AA47;
+    }
+    
+    .button-valid-informations:hover {
+        outline: none;
+        border: 1px solid #D0AA47;
+        background-color: #D0AA47;
+    }
 
 /* Ajout design couleur élément camera et prix total page order */
 .nom-camera {
@@ -253,4 +323,21 @@ justify-content: center;
     margin-right: auto;
     width: 5%;
     color: #444444;
+}
+
+.contact-detail{
+    margin-left: 5%;
+}
+.contact-detail h1 {
+    font-size: 1.3rem;
+}
+
+.contact-detail a {
+    text-decoration: none;
+    color: #444444;
+    transition: all 350ms;
+}
+
+.contact-detail a:hover{
+    color: #D0AA47;
 }

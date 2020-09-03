@@ -5,4 +5,4 @@ let $h1 = document.querySelector('h1');
 let $p = document.createElement('p');
 $h1.appendChild($p);
 
-$p.innerHTML = `Votre commande référence <span class="nom-camera">${confirmationDetail.id}</span> , pour un montant de <span class="nom-camera">${confirmationDetail.finalPrice}€</span> a bien été validée. <br><br> Nous vous remercions de votre commande.`
+$p.innerHTML = `Merci de votre commande ${confirmationDetail.firstName}! <br> Votre commande n°<span class="nom-camera">${confirmationDetail.orderId}</span>, a bien été validée pour un montant de <span class="nom-camera">${confirmationDetail.totalPrice}€</span>.`

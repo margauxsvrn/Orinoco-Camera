@@ -23,7 +23,8 @@
            <a href="./index.html">Orinoco | <span class="nom-camera">Camera</span></a> 
         </div>
         <div class="contact">
-            Contact
+           <a href="order.html"><i class="fas fa-shopping-basket"></i></a>
+            <a href="./contact.html">Contact</a> 
         </div>
     </nav>
 
@@ -34,35 +35,42 @@
 </section>
 
 <section class="formulaire">
-    <form action="POST">
+    <form id="form">
          <p>
             <i>Complétez le formulaire. Les champs marqués par </i><em>*</em> sont <em>obligatoires</em>
         </p>
         <fieldset>
             <legend>Contact</legend>
               <label for="nom">Nom<em>* </em> </label>
-              <input id="nom" placeholder="Dupont Marie" autofocus="" required="">
+              <input id="nom" type="text" placeholder="Dupont" required>
+              <br>
+              <label for="prenom">Prénom<em>* </em> </label>
+              <input id="prenom" placeholder="Marie" required>
               <br>
               <label for="telephone">Téléphone</label>
-              <input id="telephone" type="tel" placeholder="06xxxxxxxx" pattern="06[0-9]{8}">
+              <input id="telephone" type="tel" placeholder="06xxxxxxxx">
               <br>
               <label for="email">Email<em>* </em> </label>
-              <input id="email" type="email" placeholder="prenom.nom@gmail.com" required="" pattern="[a-zA-Z]*.[a-zA-Z]*@"><br>
+              <input id="email" type="email" placeholder="prenom.nom@gmail.com" required><br>
           </fieldset>
         
           <fieldset>
             <legend>Coordonnées</legend>
               <label for="adresse">Adresse<em>* </em> </label>
-              <input id="adresse" placeholder="Place de la comédie" autofocus="" required="">
+              <input id="adresse" type="text" placeholder="Place de la comédie" required>
               <br>
               <label for="ville">Ville<em>* </em> </label>
-              <input id="ville" required="" pattern="[a-zA-Z]" placeholder="Montpellier">
+              <input id="ville" required type="text" placeholder="Montpellier">
               <br>
               <label for="postal">Code postal<em>* </em> </label>
-              <input id="postal" required="" pattern="06[0-9]{8}"placeholder="34000"><br>
+              <input id="postal" type="number" required placeholder="34000" maxlength="5"><br>
           </fieldset>
+          <input class="button-valid-informations" type="submit" value="Je valide mes coordonnées">
+
     </form>
-    <button class="button-valid">Je valide la commande</button>
+
+    <input onclick="window.location.href = './confirmation.html';" class="button-valid" type="submit" value="Je valide la commande">
+    
 </section>
 
     <!-- Script Javascript -->
