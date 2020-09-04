@@ -49,6 +49,9 @@ nav a:hover{
 
 .product-list {
     list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    
 }
 
 .product-list img {
@@ -58,13 +61,14 @@ nav a:hover{
 }
 
 .product-list li {
+    
+    margin-bottom: 5%;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 5%;
     padding: 10px;
     box-shadow: 1px 1px 6px grey;
-    width: 50%;
-    height: auto;
+    width: 40%;
+    height: 100%;
     opacity: 1;
     transition: all 350ms;
 }
@@ -76,6 +80,7 @@ nav a:hover{
 
 .product-list li div {
     margin: 3%;
+    
 }
 
 

@@ -44,7 +44,6 @@ const sentForm = async function (data){
 
 document.getElementById('form').addEventListener('submit', function(e){
     e.preventDefault();
-    alert('Vos coordonnées ont bien été envoyées.')
     let lastName = document.getElementById('nom').value
     let firstName = document.getElementById('prenom').value
     let email = document.getElementById('email').value
