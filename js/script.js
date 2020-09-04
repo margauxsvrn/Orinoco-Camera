@@ -15,10 +15,13 @@ fetch(URLApi).then(function (response) {
             // Dès que l'on clique sur le block li 
             $li.addEventListener('click', function () {
                 let data = localStorage.getItem('margaux_oc')
-                if (!data) {
+                if (!data) { // Je crée la structure de mon local Storage 
                     data = {
                         selectedCameraId: "",
-                        products: []
+                        products: [],
+                        orderId : "",
+                        totalPrice : "",
+                        firstName : ""
                     }
                 } else {
                     data = JSON.parse(data)

@@ -1,12 +1,12 @@
-const order = localStorage.getItem('margaux_oc');
-const orderDetail = JSON.parse(order)
+const save = localStorage.getItem('margaux_oc');
+const saveObject = JSON.parse(save)
 
 let $h1 = document.querySelector('h1')
 let $div = document.createElement('div')
 
 $h1.appendChild($div);
 
-var products = orderDetail.products
+var products = saveObject.products
 var finalPrice = 0 ;
 
 for (let product of products){
@@ -19,6 +19,9 @@ for (let product of products){
     <p><span>Prix total</span> : <span class="nom-camera">${totalPrice} €</span> </p><br>`
 }
 $div.innerHTML += `<hr><p><span class="nom-camera">Prix final :</span> <strong>${finalPrice} € </strong></p>`
+
+
+
 
 
 
@@ -66,15 +69,17 @@ let ids = []
         },
         products : ids
     }).then(function(result){
-        // Je crée l'object à mettre dans le local storage
+        // J'ajoute les nouvelles propriétés à mon local Storage
         var orderId = result.orderId;
-        finalResult = {
-            orderId : orderId,
-            totalPrice : finalPrice,
-            firstName : firstName,
-            lastName : lastName 
-        }
-        // Je met dans le local storage toutes les info nécessaire
-        localStorage.setItem('margaux_oc', JSON.stringify(finalResult))
+        saveObject.totalPrice = finalPrice;
+        saveObject.orderId = orderId;
+        saveObject.firstName = firstName;
+
+        // Je met dans le local storage la sauvegarde mise à jour
+        localStorage.setItem('margaux_oc', JSON.stringify(saveObject))
+
+        // Quand tout le formulaire a bien été rempli et enregistré, ouvrir la page de confirmation
+        window.location.href = './confirmation.html'
     })
 })
+
