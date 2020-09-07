@@ -14,9 +14,9 @@ fetch(URLApi).then(function (response) {
 
             // Dès que l'on clique sur le block li 
             $li.addEventListener('click', function () {
-                let data = localStorage.getItem('margaux_oc')
-                if (!data) { // Je crée la structure de mon local Storage 
-                    data = {
+                let myLocalStorage = localStorage.getItem('margaux_oc')
+                if (!myLocalStorage) { // Je crée la structure de mon local Storage 
+                    myLocalStorage = {
                         selectedCameraId: "",
                         products: [],
                         orderId : "",
@@ -24,11 +24,11 @@ fetch(URLApi).then(function (response) {
                         firstName : ""
                     }
                 } else {
-                    data = JSON.parse(data)
+                    myLocalStorage = JSON.parse(myLocalStorage)
                 }
 
-                data.selectedCameraId = camera._id
-                localStorage.setItem('margaux_oc', JSON.stringify(data))
+                myLocalStorage.selectedCameraId = camera._id
+                localStorage.setItem('margaux_oc', JSON.stringify(myLocalStorage))
                 location.href = './camera.html' // J'indique la page sur laquelle je veux faire suivre les info
             })
 

@@ -1,6 +1,6 @@
-const data = JSON.parse(localStorage.getItem('margaux_oc'))
+const myLocalStorage = JSON.parse(localStorage.getItem('margaux_oc'))
 
-const cameraId = data.selectedCameraId // Création de la variable sur laquelle je récupère les éléments stocker sur le local storage
+const cameraId = myLocalStorage.selectedCameraId // Création de la variable sur laquelle je récupère l'Id des cameras stocker sur le local storage
 
 fetch(`http://localhost:3000/api/cameras/${cameraId}`).then(function(response){
     response.json().then(function(camera){ 
@@ -16,6 +16,7 @@ fetch(`http://localhost:3000/api/cameras/${cameraId}`).then(function(response){
        <div> <span><label for="lenses-select">Lentilles</span> :</label>
        <select name="lenses" id="lenses-select">
         <option value="">Choisissez une taille de lentilles</option>`;
+        // Je crée une boucle pour afficher les lentilles
         for (const lense of camera.lenses){
         content += `<option value="${lense}">${lense}</option>`;
         }
@@ -30,6 +31,13 @@ fetch(`http://localhost:3000/api/cameras/${cameraId}`).then(function(response){
         
         $div.innerHTML = content;
 
+        // J'incrémente le nombre au clic sur l'icone basket
+        var numberOrder = 0;
+        let basket = document.querySelector('.basket-icon');
+        basket.addEventListener('click', function(){
+            document.getElementById('quantity').value = ++numberOrder;
+        })
+
         // Je crée l'objet a mettre dans le local storage
         class CameraChoose {
             constructor(image, name, price, id, quantity){
@@ -41,31 +49,21 @@ fetch(`http://localhost:3000/api/cameras/${cameraId}`).then(function(response){
             }
         }
 
-        // J'incrémente le nombre au clic sur l'icone basket
-        var numberOrder=0;
-        let basket = document.querySelector('.basket-icon');
-        basket.addEventListener('click', function(){
-            document.getElementById('quantity').value = ++numberOrder;
-        })
-        
+        // Je sélectionne le bouton "commander" et je lui ajoute une action au clic
         let $button = document.querySelector('button');
         $button.addEventListener('click', function(){
             var order = new CameraChoose (camera.imageUrl, camera.name, camera.price, camera._id, numberOrder);
-            var existingIndex = data.products.findIndex(element => camera._id == element.id)
+            var existingIndex = myLocalStorage.products.findIndex(element => camera._id == element.id)
             if (existingIndex == -1 ){
-                data.products.push(order)
+                myLocalStorage.products.push(order)
             } else {
-                data.products[existingIndex].quantity = order.quantity
+                myLocalStorage.products[existingIndex].quantity = order.quantity
             }
-
-            localStorage.setItem('margaux_oc', JSON.stringify(data)) // Mettre dans le local storage l'objet
+            localStorage.setItem('margaux_oc', JSON.stringify(myLocalStorage)) // Mettre dans le local storage l'objet
             location.href = './order.html'
-            
         })
-
     });
 }).catch(function(error){
     alert('Erreur, la page ne répond pas, veuillez nous excuser')
-
 });
 
