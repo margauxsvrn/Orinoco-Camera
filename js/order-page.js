@@ -1,79 +1,83 @@
-const myLocalStorage = localStorage.getItem('margaux_oc');
-const myLocalStorageObject = JSON.parse(myLocalStorage)
+(function () {
+    "use strict";
 
-let $h1 = document.querySelector('h1')
-let $div = document.createElement('div')
+    const myLocalStorage = localStorage.getItem('margaux_oc');
+    const myLocalStorageObject = JSON.parse(myLocalStorage)
 
-$h1.appendChild($div);
+    let $h1 = document.querySelector('h1')
+    let $div = document.createElement('div')
 
-var products = myLocalStorageObject.products
-var finalPrice = 0 ;
+    $h1.appendChild($div);
 
-for (let product of products){
+    var products = myLocalStorageObject.products
+    var finalPrice = 0;
+    var product = 0
+    for (product of products) {
 
-    let totalPrice = (product.price * product.quantity)
-    finalPrice += totalPrice // Calcul du prix final
-    $div.innerHTML += `<img src="${product.image}"/> 
+        let totalPrice = (product.price * product.quantity)
+        finalPrice += totalPrice // Calcul du prix final
+        $div.innerHTML += `<img src="${product.image}"/> 
     <h1 class="nom-camera">Camera ${product.name} </h1>
     <p><span>Prix</span> : ${product.price} € </p> <p><span>Quantité</span> : ${product.quantity} </p>
     <p><span>Prix total</span> : <span class="nom-camera">${totalPrice} €</span> </p><br>`
 
-}
-$div.innerHTML += `<hr><p><span class="nom-camera">Prix final :</span> <strong>${finalPrice} € </strong></p>`
+    }
+    $div.innerHTML += `<hr><p><span class="nom-camera">Prix final :</span> <strong>${finalPrice} € </strong></p>`
 
-// Je crée la requête d'envoi du formulaire
+    // Je crée la requête d'envoi du formulaire
 
-const sentForm = async function (data){
-    let response = await fetch('http://localhost:3000/api/cameras/order', {
-        method: 'POST', 
-        headers: {
-            'Content-Type' : 'application/json'
-        },
-        body : JSON.stringify(data)
-    })
-    let responseData = response.json()
-    return responseData;
-}
-
-// Je selectionne les informations rentrées dans le formulaire
-
-document.getElementById('form').addEventListener('submit', function(e){
-    e.preventDefault();
-    let lastName = document.getElementById('nom').value
-    let firstName = document.getElementById('prenom').value
-    let email = document.getElementById('email').value
-    let address = document.getElementById('adresse').value
-    let city = document.getElementById('ville').value
-
-    // J'utilise la fonction qui permets d'envoyer les informations
-
-// Je crée une boucle pour afficher un par un les ID
-let ids = []
-    for (product of products){
-        ids.push(product.id) 
+    const sentForm = async function (data) {
+        let response = await fetch('http://localhost:3000/api/cameras/order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        let responseData = response.json()
+        return responseData;
     }
 
-   sentForm({
-        contact: {
-            firstName: firstName,
-            lastName: lastName,
-            address: address,
-            city: city,
-            email: email
-        },
-        products : ids
-    }).then(function(result){
-        // J'ajoute les nouvelles propriétés à mon local Storage
-        var orderId = result.orderId;
-        myLocalStorageObject.totalPrice = finalPrice;
-        myLocalStorageObject.orderId = orderId;
-        myLocalStorageObject.firstName = firstName;
+    // Je selectionne les informations rentrées dans le formulaire
 
-        // Je met dans le local storage la sauvegarde mise à jour
-        localStorage.setItem('margaux_oc', JSON.stringify(myLocalStorageObject))
+    document.getElementById('form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        let lastName = document.getElementById('nom').value
+        let firstName = document.getElementById('prenom').value
+        let email = document.getElementById('email').value
+        let address = document.getElementById('adresse').value
+        let city = document.getElementById('ville').value
 
-        // Quand tout le formulaire a bien été rempli et enregistré, ouvrir la page de confirmation
-        window.location.href = './confirmation.html'
-    })
-})
+        // J'utilise la fonction qui permets d'envoyer les informations
 
+        // Je crée une boucle pour afficher un par un les ID
+        let ids = []
+        for (product of products) {
+            ids.push(product.id)
+        }
+
+        sentForm({
+            contact: {
+                firstName: firstName,
+                lastName: lastName,
+                address: address,
+                city: city,
+                email: email
+            },
+            products: ids
+        }).then(function (result) {
+            // J'ajoute les nouvelles propriétés à mon local Storage
+            var orderId = result.orderId;
+            myLocalStorageObject.totalPrice = finalPrice;
+            myLocalStorageObject.orderId = orderId;
+            myLocalStorageObject.firstName = firstName;
+
+            // Je met dans le local storage la sauvegarde mise à jour
+            localStorage.setItem('margaux_oc', JSON.stringify(myLocalStorageObject))
+
+            // Quand tout le formulaire a bien été rempli et enregistré, ouvrir la page de confirmation
+            window.location.href = './confirmation.html'
+        });
+    });
+
+})();
